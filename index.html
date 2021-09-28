@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <button id="getAccounts">Get All Acc,Cust and Trans List</button>
+    <button id="create">Create Account(id:10)</button>
+    <button id="update">Update Account(id:10)</button>
+    <button id="delete">Delete Account(id:10)</button>
+    <script src="./node_modules/json-graphql-server/lib/json-graphql-server.client.min.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            const data = {};
+            const server = JsonGraphqlServer({
+                data,
+                url: 'http://localhost:3000/graphql'
+            });
+            server.start();
+        });
+
+        let queries = {
+            get: `query { accounts {active} customers {active} transactions {active} }`,
+            create: `mutation CreateAccount($input: CreateAccountInput!) { createAccount(input: $input) { id,customerId,alias,balance,active}}`,
+            update: 'mutation UpdateAccount($id: Int!, $input: CreateAccountInput!) { updateAccount(id: $id, input: $input) { id,customerId,alias,balance,active } }',
+            delete: 'mutation { deleteAccount(id:"10") { id } }'
+        }
+        let variables = {
+            create: {
+                "input": {
+                    "id": "10",
+                    "customerId": "3",
+                    "alias": "savings044",
+                    "balance": 3200,
+                    "active": true
+                }
+            },
+            update: {
+                "id": 10,
+                "input": {
+                    "id": "10",
+                    "customerId": "1",
+                    "alias": "savings333",
+                    "balance": 100,
+                    "active": false
+                }
+            }
+        }
+        function getHttpRequest(query) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:4000/graphql", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.onerror = function (error) {
+                console.error(error);
+            }
+            xhr.onload = function () {
+                const result = JSON.parse(xhr.responseText);
+                console.log('response:', result);
+            }
+
+            const body = JSON.stringify(query);
+            xhr.send(body);
+
+            return xhr;
+        }
+
+        // Get All Accounts List
+        window.document.getElementById('getAccounts').addEventListener('click', function () {
+            let xhr = getHttpRequest({
+                query: queries.get
+            });
+        });
+        // Create Account
+        window.document.getElementById('create').addEventListener('click', function () {
+            let xhr = getHttpRequest({
+                query: queries.create,
+                variables: variables.create
+            });
+        });
+        // Update Account
+        window.document.getElementById('update').addEventListener('click', function () {
+            let xhr = getHttpRequest({
+                query: queries.update,
+                variables: variables.update
+            });
+        });
+        // Delete Account
+        window.document.getElementById('delete').addEventListener('click', function () {
+            let xhr = getHttpRequest({
+                query: queries.delete
+            });
+        });
+    </script>
+</body>
+
+</html>

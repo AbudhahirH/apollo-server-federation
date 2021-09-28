@@ -1,0 +1,203 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "firstName": "fName 001",
+      "lastName": "lName 001",
+      "active": true
+    },
+    {
+      "id": "2",
+      "firstName": "fName 002",
+      "lastName": "lName 002",
+      "active": true
+    },
+    {
+      "id": "3",
+      "firstName": "fName 003",
+      "lastName": "lName 003",
+      "active": true
+    }
+  ],
+  "accounts": [
+    {
+      "id": "1",
+      "customerId": "1",
+      "alias": "savings011",
+      "balance": 1200,
+      "active": true
+    },
+    {
+      "id": "2",
+      "customerId": "1",
+      "alias": "savings012",
+      "balance": 200,
+      "active": true
+    },
+    {
+      "id": "3",
+      "customerId": "1",
+      "alias": "savings013",
+      "balance": 100,
+      "active": true
+    },
+    {
+      "id": "4",
+      "customerId": "2",
+      "alias": "savings021",
+      "balance": 200,
+      "active": true
+    },
+    {
+      "id": "5",
+      "customerId": "2",
+      "alias": "savings022",
+      "balance": 100,
+      "active": true
+    },
+    {
+      "id": "6",
+      "customerId": "2",
+      "alias": "savings023",
+      "balance": 1200,
+      "active": true
+    },
+    {
+      "id": "7",
+      "customerId": "3",
+      "alias": "savings031",
+      "balance": 100,
+      "active": true
+    },
+    {
+      "id": "8",
+      "customerId": "3",
+      "alias": "savings032",
+      "balance": 200,
+      "active": true
+    },
+    {
+      "id": "9",
+      "customerId": "3",
+      "alias": "savings033",
+      "balance": 100,
+      "active": true
+    }
+  ],
+  "transactions": [
+    {
+      "id": "1",
+      "accountId": "1",
+      "type": "withdraw",
+      "amount": 100
+    },
+    {
+      "id": "2",
+      "accountId": "2",
+      "type": "withdraw",
+      "amount": 100
+    },
+    {
+      "id": "3",
+      "accountId": "3",
+      "type": "withdraw",
+      "amount": 100
+    },
+    {
+      "id": "4",
+      "accountId": "4",
+      "type": "withdraw",
+      "amount": 100
+    },
+    {
+      "id": "5",
+      "accountId": "5",
+      "type": "withdraw",
+      "amount": 100
+    },
+    {
+      "id": "6",
+      "accountId": "6",
+      "type": "withdraw",
+      "amount": 100
+    },
+    {
+      "id": "7",
+      "accountId": "7",
+      "type": "withdraw",
+      "amount": 100
+    },
+    {
+      "id": "8",
+      "accountId": "8",
+      "type": "withdraw",
+      "amount": 100
+    },
+    {
+      "id": "9",
+      "accountId": "9",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "10",
+      "accountId": "9",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "11",
+      "accountId": "1",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "12",
+      "accountId": "2",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "13",
+      "accountId": "3",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "14",
+      "accountId": "4",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "15",
+      "accountId": "5",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "16",
+      "accountId": "6",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "17",
+      "accountId": "7",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "18",
+      "accountId": "8",
+      "type": "deposit",
+      "amount": 100
+    },
+    {
+      "id": "19",
+      "accountId": "9",
+      "type": "deposit",
+      "amount": 100
+    }
+  ]
+}
