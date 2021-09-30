@@ -1,25 +1,15 @@
 {
-  "name": "federation-demo",
-  "main": "gateway.js",
+  "name": "ing-html-tpa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start-gateway": "nodemon gateway.js",
-    "start-service-accounts": "nodemon services/accounts/index.js",
-    "start-service-customers": "nodemon services/customers/index.js",
-    "start-service-transactions": "nodemon services/transactions/index.js",
-    "start-services": "concurrently \"npm:start-service-*\"",
-    "postinstall": "lerna bootstrap",
-    "json-server": "json-server --watch db.json"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "concurrently": "latest",
-    "lerna": "^4.0.0",
-    "nodemon": "latest"
-  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@apollo/gateway": "latest",
-    "apollo-server": "latest",
     "axios": "^0.21.1",
-    "graphql": "latest",
-    "json-server": "^0.16.3"
+    "bootstrap": "^5.1.0"
   }
 }

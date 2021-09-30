@@ -1,99 +1,158 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ING TPA</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        .btn-orange {
+            background-color: #f60;
+            border: 1px solid #f60;
+            color: bisque;
+        }
+        .accountRow{
+            border-bottom: 1px dotted #ccc;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        .accountRow:hover {
+    background: #e9ecef54;
+}
+.accountRow .btn{display: none;}
+.accountRow .btn img{opacity: 0.6;}
+.accountRow:hover .btn{display: block;}
+
+    </style>
 </head>
 
 <body>
-    <button id="getAccounts">Get All Acc,Cust and Trans List</button>
-    <button id="create">Create Account(id:10)</button>
-    <button id="update">Update Account(id:10)</button>
-    <button id="delete">Delete Account(id:10)</button>
-    <script src="./node_modules/json-graphql-server/lib/json-graphql-server.client.min.js"></script>
-    <script type="text/javascript">
-        window.addEventListener('load', function () {
-            const data = {};
-            const server = JsonGraphqlServer({
-                data,
-                url: 'http://localhost:3000/graphql'
-            });
-            server.start();
-        });
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="./img/ing-logo.svg" alt="ING">
+            </a>
+        </nav>
 
-        let queries = {
-            get: `query { accounts {active} customers {active} transactions {active} }`,
-            create: `mutation CreateAccount($input: CreateAccountInput!) { createAccount(input: $input) { id,customerId,alias,balance,active}}`,
-            update: 'mutation UpdateAccount($id: Int!, $input: CreateAccountInput!) { updateAccount(id: $id, input: $input) { id,customerId,alias,balance,active } }',
-            delete: 'mutation { deleteAccount(id:"10") { id } }'
-        }
-        let variables = {
-            create: {
-                "input": {
-                    "id": "10",
-                    "customerId": "3",
-                    "alias": "savings044",
-                    "balance": 3200,
-                    "active": true
-                }
-            },
-            update: {
-                "id": 10,
-                "input": {
-                    "id": "10",
-                    "customerId": "1",
-                    "alias": "savings333",
-                    "balance": 100,
-                    "active": false
-                }
-            }
-        }
-        function getHttpRequest(query) {
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:4000/graphql", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.onerror = function (error) {
-                console.error(error);
-            }
-            xhr.onload = function () {
-                const result = JSON.parse(xhr.responseText);
-                console.log('response:', result);
-            }
+        <br /><br /><br />
+        <div class="row justify-content-center" id="loginPage">
+            <div class="col-md-6 col-lg-4">
+                <form class="row g-3 needs-validation" novalidate id="loginForm">
+                    <div class="mb-3">
+                        <label for="inputCif" class="form-label">CIF</label>
+                        <input type="number" class="form-control" id="inputCif" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid CIF.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid CIF.
+                        </div>
+                    </div>
+                    <button id="btnLogin" type="submit" class="btn btn-warning btn-orange">
+                        Login</button>
+                </form>
+            </div>
+        </div>
+        <div class="row" id="dashPage" style="display: none;">
+            <div class="row" style="padding-bottom: 35px; margin-bottom: 20px; border-bottom:1px solid #ccc">
+                <div class="col-9">
+                    <p>Welcome back,</p>
+                    <h3>Mr. <span id="firstName"></span> <span id="lastName"></span></h3>
+                    <h6>Mobile: +123 456 7890</h6>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editProfile" id="editProfileButton">Edit
+                        Profile</button>
+                </div>
+            </div>
+            <div class="row accountRow" >
+                <div class="col-5">Account Details:
+                </div>
+                <div class="col-4">Balance:</div>
+                <div class="col-3">Actions</div>
+            </div>
+            <div id="accountSection"> No Accounts.</div>
+            
+        </div>
 
-            const body = JSON.stringify(query);
-            xhr.send(body);
+        <!-- Edit Profile modal -->
+        <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfile" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form class="needs-validation" novalidate>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
 
-            return xhr;
-        }
+                            <div class="mb-3">
+                                <label for="inputName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="inputFirstName" required value="Jack">
+                                <input type="text" class="form-control" id="inputLastName" required value="Sparrow">
+                                <div class="invalid-feedback">
+                                    Please provide a name.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPhone" class="form-label">Phone</label>
+                                <input type="number" class="form-control" id="inputPhone" value="1234567890" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid phone number.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-        // Get All Accounts List
-        window.document.getElementById('getAccounts').addEventListener('click', function () {
-            let xhr = getHttpRequest({
-                query: queries.get
-            });
-        });
-        // Create Account
-        window.document.getElementById('create').addEventListener('click', function () {
-            let xhr = getHttpRequest({
-                query: queries.create,
-                variables: variables.create
-            });
-        });
-        // Update Account
-        window.document.getElementById('update').addEventListener('click', function () {
-            let xhr = getHttpRequest({
-                query: queries.update,
-                variables: variables.update
-            });
-        });
-        // Delete Account
-        window.document.getElementById('delete').addEventListener('click', function () {
-            let xhr = getHttpRequest({
-                query: queries.delete
-            });
-        });
-    </script>
+        <!-- Deposit Money modal -->
+        <div class="modal fade" id="depositMoney" tabindex="-1" aria-labelledby="depositMoney" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form class="needs-validation" novalidate id="depositForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="depositMoneyLabel"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="inputAccount" class="form-label">Account</label>
+                                <input type="text" class="form-control" id="inputAccount" disabled>                                
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputAmount" class="form-label">Amount</label>
+                                <input type="number" step=".01" class="form-control" id="inputAmount" value="100.00" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid amount.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button id="btnDepositMoney" type="submit" class="btn btn-success" data-type="DEPOSIT">Deposit</button>
+                            <button id="btnWithdrawMoney" type="submit" class="btn btn-danger" data-type="WITHDRAW">Withdraw</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 
 </html>
