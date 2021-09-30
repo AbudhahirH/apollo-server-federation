@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ING TPA</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        .btn-orange {
+            background-color: #f60;
+            border: 1px solid #f60;
+            color: bisque;
+        }
+        .accountRow{
+            border-bottom: 1px dotted #ccc;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        .accountRow:hover {
+    background: #e9ecef54;
+}
+.accountRow .btn{display: none;}
+.accountRow .btn img{opacity: 0.6;}
+.accountRow:hover .btn{display: block;}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="./img/ing-logo.svg" alt="ING">
+            </a>
+        </nav>
+
+        <br /><br /><br />
+        <div class="row justify-content-center" id="loginPage">
+            <div class="col-md-6 col-lg-4">
+                <form class="row g-3 needs-validation" novalidate id="loginForm">
+                    <div class="mb-3">
+                        <label for="inputCif" class="form-label">CIF</label>
+                        <input type="number" class="form-control" id="inputCif" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid CIF.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid CIF.
+                        </div>
+                    </div>
+                    <button id="btnLogin" type="submit" class="btn btn-warning btn-orange">
+                        Login</button>
+                </form>
+            </div>
+        </div>
+        <div class="row" id="dashPage" style="display: none;">
+            <div class="row" style="padding-bottom: 35px; margin-bottom: 20px; border-bottom:1px solid #ccc">
+                <div class="col-9">
+                    <p>Welcome back,</p>
+                    <h3>Mr. <span id="firstName"></span> <span id="lastName"></span></h3>
+                    <h6>Mobile: +123 456 7890</h6>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editProfile" id="editProfileButton">Edit
+                        Profile</button>
+                </div>
+            </div>
+            <div class="row accountRow" >
+                <div class="col-5">Account Details:
+                </div>
+                <div class="col-4">Balance:</div>
+                <div class="col-3">Actions</div>
+            </div>
+            <div id="accountSection"> No Accounts.</div>
+            
+        </div>
+
+        <!-- Edit Profile modal -->
+        <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfile" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form class="needs-validation" novalidate>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label for="inputName" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="inputFirstName" required value="Jack">
+                                <input type="text" class="form-control" id="inputLastName" required value="Sparrow">
+                                <div class="invalid-feedback">
+                                    Please provide a name.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPhone" class="form-label">Phone</label>
+                                <input type="number" class="form-control" id="inputPhone" value="1234567890" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid phone number.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deposit Money modal -->
+        <div class="modal fade" id="depositMoney" tabindex="-1" aria-labelledby="depositMoney" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form class="needs-validation" novalidate id="depositForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="depositMoneyLabel"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="inputAccount" class="form-label">Account</label>
+                                <input type="text" class="form-control" id="inputAccount" disabled>                                
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputAmount" class="form-label">Amount</label>
+                                <input type="number" step=".01" class="form-control" id="inputAmount" value="100.00" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid amount.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button id="btnDepositMoney" type="submit" class="btn btn-success" data-type="DEPOSIT">Deposit</button>
+                            <button id="btnWithdrawMoney" type="submit" class="btn btn-danger" data-type="WITHDRAW">Withdraw</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
