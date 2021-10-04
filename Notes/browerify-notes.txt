@@ -1,0 +1,18 @@
+I did run ApolloClient in html without NodeJS support.
+
+I attached the files, please run html in browser running with our existing POC servers( json-server, graphql server).
+Please change extension from '.txt' to '.js'.
+
+I used Browserify package to read modules directly in html file.
+Refer: https://medium.com/swlh/browersify-use-require-in-client-side-javascript-7414b229a4ad
+
+Also, included steps below.
+Step 1: Run below cmd to install Browserify package
+-> npm install -g browserify
+
+Step 2:  Run below cmd to produce 'bundle.js' from 'index.js'
+browserify <nameOfYourJSFile> -o bundle.js
+-> browserify index.js -o bundle.js
+
+Step 3:  Link 'bundle.js' instead of 'index.js' in index.html
+-> <script src="./bundle.js"> </script>
