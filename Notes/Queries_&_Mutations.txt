@@ -1,0 +1,79 @@
+PARTIES :
+
+1. Create Customer :
+
+mutation {
+  createCustomer(firstName: "Tom", lastName: "Holland") {
+    customerId
+  }
+}
+
+2. Get Customer :
+
+query{
+  customer(customerId: 1) {
+    firstName
+    lastName
+    customerId
+    active
+  }
+}
+
+3. Delete Customer :
+
+mutation{
+  deleteCustomer(customerId:1)
+}
+
+
+PRODUCTS : 
+
+1. Create Account : 
+
+mutation {
+  createAccount(customerId: 1, alias: "HCL") {
+    accountNo
+  }
+}
+
+2. Get Account : 
+
+query{
+  account(id: 1) {
+    alias
+    active
+    customerId
+    balance
+  }
+}
+3.Get all accounts
+query{
+  customer(customerId:0) {
+    accounts {
+      accountNo
+      active
+      alias
+      balance
+      customerId
+    }
+    active
+    customerId
+    firstName
+    lastName
+  }
+}
+4. Update Account : 
+
+mutation {
+  updateAccount(accountNo: 1, command: "DEPOSIT", amount: 10000000) {
+    alias
+    active
+    balance
+  }
+}
+
+5.Delete Account :
+
+mutation{
+  deleteAccount(accountNo:2)
+}
