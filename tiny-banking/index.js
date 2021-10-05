@@ -1,13 +1,14 @@
-// Run --> node index.js
-debugger
-require('dotenv').config();
+// Run using node --> node index.js
+// Run using html --> open index.html in browser
+
+const dotenv = require('dotenv').config();
 const gql = require('graphql-tag');
 const ApolloClient = require('apollo-boost').ApolloClient;
-const fetch = require('cross-fetch/polyfill').fetch;
 const createHttpLink = require('apollo-link-http').createHttpLink;
+const fetch = require('cross-fetch/polyfill').fetch;
 const InMemoryCache = require('apollo-cache-inmemory').InMemoryCache;
-process.env.API = "http://localhost:4000/graphql";
 
+process.env.API = "http://localhost:4000/graphql";
 const client = new ApolloClient({
     link: createHttpLink({
         uri: process.env.API,
@@ -19,25 +20,28 @@ const client = new ApolloClient({
 // Mutation
 client.mutate({
     mutation: gql`
-    mutation CreateAccount($input: CreateAccountInput!) { createAccount(input: $input) { id,customerId,alias,balance,active}}
-    `,
-    variables: {
-        "input": {
-            "id": "10",
-            "customerId": "3",
-            "alias": "savings044",
-            "balance": 3200,
-            "active": true
-        }}
-}).then(job => {
-    console.log(job);
+    mutation {
+        createCustomer(firstName: "Tom", lastName: "Holland") {
+          customerId
+        }
+      }
+    `
+}).then(res => {
+    console.log("mutation response : ", res);
 })
 
 // Query
 client.query({
     query: gql`
-    query {accounts {active}customers {active}transactions {active}}
+    query{
+        customer(customerId: 1) {
+          firstName
+          lastName
+          customerId
+          active
+        }
+      }
     `,
-}).then(job => {
-    console.log(job);
+}).then(res => {
+    console.log("query response : ", res);
 })
