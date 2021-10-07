@@ -1,0 +1,94 @@
+1. Get Customer
+---------------
+Request:
+
+query Query($customerCustomerId: Float) {
+  customer(customerId: $customerCustomerId) {
+    active
+    customerId
+    firstName
+    lastName
+  }
+}
+
+Variables:
+
+{
+  "customerCustomerId": 0
+}
+
+Response:
+
+{
+  "data": {
+    "customer": {
+      "active": true,
+      "customerId": 1,
+      "firstName": "Tom",
+      "lastName": "Holland"
+    }
+  }
+}
+
+--------------------------------------------------------------------------------------------------------
+2.Deposit/Withdraw Money:
+
+Request:
+
+mutation Mutation($updateAccountAccountNo: Float, $updateAccountAmount: Float, $updateAccountCommand: String) {
+  updateAccount(accountNo: $updateAccountAccountNo, amount: $updateAccountAmount, command: $updateAccountCommand) {
+    accountNo
+    active
+    alias
+    balance
+    customerId
+  }
+}
+
+varaibles:
+
+{
+  "updateAccountAccountNo": 1,
+  "updateAccountAmount": 10000,
+  "updateAccountCommand": "DEPOSIT"
+}
+
+Response:
+
+{
+  "data": {
+    "updateAccount": {
+      "accountNo": 0,
+      "active": true,
+      "alias": "savongs",
+      "balance": 10000,
+      "customerId": 0
+    }
+  }
+}
+
+--------------------------------------------------------------------------------------------------------
+
+Additional Queries
+-------------------
+
+Create Account : 
+
+mutation {
+  createAccount(customerId: 0, alias: "HCL") {
+    accountNo
+  }
+}
+--------------------------------------------------------------------------------------------------------
+
+Get Account : 
+
+query{
+  account(id: 1) {
+    alias
+    active
+    customerId
+    balance
+  }
+}
+--------------------------------------------------------------------------------------------------------
