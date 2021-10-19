@@ -1,0 +1,76 @@
+{
+  "_from": "@apollo/rover",
+  "_id": "@apollo/rover@0.3.0",
+  "_inBundle": false,
+  "_integrity": "sha512-TFPCP5TsCtATuR0i6yXxZcGhsC57uD9/S8GungjZACHKK8xIb5SNF4OjCJqrrmjKKVrDrm2aynKCsjxIxjhF0w==",
+  "_location": "/@apollo/rover",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@apollo/rover",
+    "name": "@apollo/rover",
+    "escapedName": "@apollo%2frover",
+    "scope": "@apollo",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/@apollo/rover/-/rover-0.3.0.tgz",
+  "_shasum": "0aa71190d45d65410f2a5aac6c5acd0dea00af1c",
+  "_spec": "@apollo/rover",
+  "_where": "D:\\SVN-REPOSITORY\\svn_abu\\GraphQL\\apollo-graphql\\federation-demo\\fromKaruna\\git\\apollo-server-federation",
+  "author": {
+    "name": "Apollo Developers",
+    "email": "opensource@apollographql.com"
+  },
+  "bin": {
+    "rover": "run.js"
+  },
+  "bugs": {
+    "url": "https://github.com/apollographql/rover/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "binary-install": "^0.1.1",
+    "console.table": "^0.10.0",
+    "detect-libc": "^1.0.3"
+  },
+  "deprecated": false,
+  "description": "The new Apollo CLI",
+  "devDependencies": {
+    "prettier": "^2.3.0"
+  },
+  "homepage": "https://github.com/apollographql/rover#readme",
+  "keywords": [
+    "rover",
+    "graphql",
+    "apollo",
+    "federation",
+    "data",
+    "tooling",
+    "tools"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "@apollo/rover",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apollographql/rover.git"
+  },
+  "scripts": {
+    "fmt": "prettier --write **/*.js",
+    "fmt:check": "prettier --check **/*.js",
+    "postinstall": "node ./install.js",
+    "prepack": "cp ../../README.md . && cp ../../LICENSE ."
+  },
+  "version": "0.3.0",
+  "volta": {
+    "node": "16.9.1",
+    "npm": "7.24.0"
+  }
+}
