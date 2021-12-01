@@ -7,6 +7,7 @@ const ApolloClient = require('apollo-boost').ApolloClient;
 const createHttpLink = require('apollo-link-http').createHttpLink;
 const fetch = require('cross-fetch/polyfill').fetch;
 const InMemoryCache = require('apollo-cache-inmemory').InMemoryCache;
+const ApolloLinkContext = require('apollo-link-context');
 
 process.env.API = "http://localhost:4000/graphql";
 const client = new ApolloClient({
