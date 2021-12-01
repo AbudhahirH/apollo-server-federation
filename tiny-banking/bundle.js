@@ -782,6 +782,7 @@ const createHttpLink = require('apollo-link-http').createHttpLink;
 const fetch = require('cross-fetch/polyfill').fetch;
 const InMemoryCache = require('apollo-cache-inmemory').InMemoryCache;
 const ApolloLinkContext = require('apollo-link-context');
+const ApolloLink = require('apollo-link');
 
 process.env.API = "http://localhost:4000/graphql";
 const client = new ApolloClient({
@@ -821,7 +822,7 @@ client.query({
     console.log("query response : ", res);
 })
 }).call(this)}).call(this,require('_process'))
-},{"_process":4,"apollo-boost":8,"apollo-cache-inmemory":10,"apollo-link-context":15,"apollo-link-http":22,"cross-fetch/polyfill":30,"dotenv":31,"graphql-tag":34}],6:[function(require,module,exports){
+},{"_process":4,"apollo-boost":8,"apollo-cache-inmemory":10,"apollo-link":24,"apollo-link-context":15,"apollo-link-http":22,"cross-fetch/polyfill":30,"dotenv":31,"graphql-tag":34}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
